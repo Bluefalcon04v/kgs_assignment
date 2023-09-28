@@ -34,10 +34,20 @@ video{
     left: 0;
     right: 0;
     /* color: white; */
-    background-color: rgba(255, 255, 255, 0.044);
     z-index: 100;
     opacity: 0;
     transition: opacity 450ms ease-in-out;
+}
+
+.videoControlContainer::before{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    background: linear-gradient(to top, #111c36aa, transparent);
+    width: 100%;
+    aspect-ratio: 6/1;
+    z-index: -1;
+    pointer-events: none;
 }
 
 .videoContainer:hover .videoControlContainer,
@@ -56,7 +66,6 @@ video{
 .videoControlContainer .controls button{
     background: none;
     border: none;
-    /* color: inherit; */
     padding: 0;
     height: 30px;
     width: 30px;
@@ -76,6 +85,11 @@ video{
     cursor: pointer;
     padding: 2px;
 }
+
+.controls .fullScreen{
+    position: absolute;
+    right: 10px;
+    bottom: 5px;}
 
 .videoContainer.paused .pauseIcon{
     display: none;
