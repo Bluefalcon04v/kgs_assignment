@@ -1,0 +1,25 @@
+body{
+  /* ? Colors */
+  --primaryClr: #0c1322;
+  --secondaryClr: #14203e;
+  --highLightClr: #FCAF36;
+  --fontClr: #eaeaea;
+  --subFontClr: #FAFAFA;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+}
+
+*::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body{
+  height: 100%;
+  width: 100%;
+  /* background: #0c1322; */
+  background: lightblue;
+  /* height: auto; */
+}

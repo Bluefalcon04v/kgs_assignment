@@ -1,0 +1,27 @@
+.logo{
+    width: 80px;
+}
+
+.listContainer{
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--secondaryClr);
+    padding: 12px 30px;
+    position: relative;
+}
+
+.listContainer > ul {
+    display: flex;
+    align-items: center;
+    color: var(--fontClr);
+}
+
+.listContainer > ul > li{
+    list-style: none;
+    padding: 25px;
+    cursor: pointer;
+}
+
+.listContainer > ul > li:hover{
+    color: var(--highLightClr);
+}
