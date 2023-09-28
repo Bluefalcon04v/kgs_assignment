@@ -33,7 +33,8 @@ video{
     bottom: 0;
     left: 0;
     right: 0;
-    color: white;
+    /* color: white; */
+    background-color: rgba(255, 255, 255, 0.044);
     z-index: 100;
     opacity: 0;
     transition: opacity 450ms ease-in-out;
@@ -55,13 +56,34 @@ video{
 .videoControlContainer .controls button{
     background: none;
     border: none;
-    color: inherit;
+    /* color: inherit; */
     padding: 0;
     height: 30px;
     width: 30px;
     font-size: 16px;
+    opacity: .60;
+    transition: opacity 150ms ease-in-out;
 }
 
+.videoControlContainer .controls button:hover{
+    opacity: 1;
+}
+
+.playPauseBtn svg{
+    background-color: var(--secondaryClr);
+    border: 2px solid var(--subFontClr);
+    border-radius: 15px;
+    cursor: pointer;
+    padding: 2px;
+}
+
+.videoContainer.paused .pauseIcon{
+    display: none;
+}
+
+.videoContainer:not(.paused) .playIcon{
+    display: none;
+}
 
 
 /* ! ----------------------------------VIDEO CONTENT STYLING------------------ */

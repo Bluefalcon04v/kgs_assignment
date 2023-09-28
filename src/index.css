@@ -19,7 +19,5 @@ body{
 html, body{
   height: 100%;
   width: 100%;
-  /* background: #0c1322; */
   background: lightblue;
-  /* height: auto; */
 }
