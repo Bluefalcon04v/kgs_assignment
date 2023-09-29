@@ -8,10 +8,49 @@ const Video = () => {
   const video = useRef(null);
   const volumeBtn = useRef(null);
   const fullScreenBtn = useRef(null);
+  const speedDropdownRef = useRef(null);
   const [isPaused, setIsPaused] = useState(true);
   const [isMuted, setIsMuted] = useState(false);
   const [totalDuration, setTotalDuration] = useState("0:00");
+  const [isSpeedMenuVisible, setIsSpeedMenuVisible] = useState(false);
+  const [selectedSpeed, setSelectedSpeed] = useState(1);
 
+  const togglePlay = () => {
+    if (video.current) {
+      if (video.current.paused) {
+        video.current.play();
+      } else {
+        video.current.pause();
+      }
+    }
+  };
+
+  const handleSpeedSelect = (speed) => {
+    if (video.current) {
+      video.current.playbackRate = speed;
+    }
+    setSelectedSpeed(speed);
+    setIsSpeedMenuVisible(false);
+  };
+
+  const toggleFullScreen = () => {
+    if (video.current) {
+      if (video.current.requestFullscreen) {
+        video.current.requestFullscreen();
+      } else if (video.current.mozRequestFullScreen) {
+        video.current.mozRequestFullScreen();
+      } else if (video.current.webkitRequestFullscreen) {
+        video.current.webkitRequestFullscreen();
+      }
+    }
+  };
+
+  const toggleMute = () => {
+    if (video.current) {
+      video.current.muted = !video.current.muted;
+      setIsMuted(video.current.muted);
+    }
+  };
 
   useEffect(() => {
     if (playPauseBtn.current) {
@@ -61,21 +100,22 @@ const Video = () => {
       });
     }
 
-     // *---------------------------------- Current Timeline
+    // *---------------------------------- Current Timeline
     if (video.current) {
       video.current.addEventListener("loadedmetadata", () => {
         const minutes = Math.floor(video.current.duration / 60);
         const seconds = Math.floor(video.current.duration % 60);
         setTotalDuration(`${minutes}:${seconds.toString().padStart(2, "0")}`);
       });
-  
+
       video.current.addEventListener("timeupdate", () => {
         const minutes = Math.floor(video.current.currentTime / 60);
         const seconds = Math.floor(video.current.currentTime % 60);
-        document.querySelector(".currentTime").textContent = `${minutes}:${seconds.toString().padStart(2, "0")}`;
+        document.querySelector(
+          ".currentTime"
+        ).textContent = `${minutes}:${seconds.toString().padStart(2, "0")}`;
       });
-    }  
-
+    }
 
     return () => {
       if (video.current) {
@@ -94,34 +134,24 @@ const Video = () => {
     };
   }, []);
 
-  const togglePlay = () => {
-    if (video.current) {
-      if (video.current.paused) {
-        video.current.play();
-      } else {
-        video.current.pause();
+  // *------------------------ClickOutside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        isSpeedMenuVisible &&
+        speedDropdownRef.current &&
+        !speedDropdownRef.current.contains(event.target)
+      ) {
+        setIsSpeedMenuVisible(false);
       }
-    }
-  };
+    };
 
-  const toggleFullScreen = () => {
-    if (video.current) {
-      if (video.current.requestFullscreen) {
-        video.current.requestFullscreen();
-      } else if (video.current.mozRequestFullScreen) {
-        video.current.mozRequestFullScreen();
-      } else if (video.current.webkitRequestFullscreen) {
-        video.current.webkitRequestFullscreen();
-      }
-    }
-  };
+    document.addEventListener("mousedown", handleClickOutside);
 
-  const toggleMute = () => {
-    if (video.current) {
-      video.current.muted = !video.current.muted;
-      setIsMuted(video.current.muted);
-    }
-  };
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isSpeedMenuVisible]);
 
   return (
     <>
@@ -130,6 +160,7 @@ const Video = () => {
           <div className="videoControlContainer">
             <div className="timelineContainer">
               <div className="controls">
+                {/* ------Play Pause Buttons---- */}
                 <button className="playPauseBtn" ref={playPauseBtn}>
                   {isPaused ? (
                     <svg
@@ -154,6 +185,7 @@ const Video = () => {
                     </svg>
                   )}
                 </button>
+                {/* ------Volume Buttons---- */}
                 <button className="volumeBtn" ref={volumeBtn}>
                   {isMuted ? (
                     <svg
@@ -162,14 +194,12 @@ const Video = () => {
                       viewBox="0 -3 30 30"
                       xmlns="http://www.w3.org/2000/svg"
                     >
-                      <g >
+                      <g>
                         <g
                           transform="translate(-311.000000, -573.000000)"
                           fill="#FCAF36"
                         >
-                          <path
-                            d="M336.444,585 L340.617,580.827 C341.067,580.377 341.109,579.688 340.711,579.289 C340.312,578.891 339.623,578.933 339.173,579.383 L335,583.556 L330.827,579.383 C330.377,578.933 329.688,578.891 329.289,579.289 C328.891,579.688 328.933,580.377 329.383,580.827 L333.556,585 L329.383,589.173 C328.933,589.623 328.891,590.312 329.289,590.711 C329.688,591.109 330.377,591.067 330.827,590.617 L335,586.444 L339.173,590.617 C339.623,591.067 340.312,591.109 340.711,590.711 C341.109,590.312 341.067,589.623 340.617,589.173 L336.444,585 L336.444,585 Z M325,573 L318,577.667 L318,592.333 L325,597 C326.104,597 327,596.104 327,595 L327,575 C327,573.896 326.104,573 325,573 L325,573 Z M311,581 L311,589 C311,590.104 311.896,591 313,591 L316,591 L316,579 L313,579 C311.896,579 311,579.896 311,581 L311,581 Z"
-                          ></path>
+                          <path d="M336.444,585 L340.617,580.827 C341.067,580.377 341.109,579.688 340.711,579.289 C340.312,578.891 339.623,578.933 339.173,579.383 L335,583.556 L330.827,579.383 C330.377,578.933 329.688,578.891 329.289,579.289 C328.891,579.688 328.933,580.377 329.383,580.827 L333.556,585 L329.383,589.173 C328.933,589.623 328.891,590.312 329.289,590.711 C329.688,591.109 330.377,591.067 330.827,590.617 L335,586.444 L339.173,590.617 C339.623,591.067 340.312,591.109 340.711,590.711 C341.109,590.312 341.067,589.623 340.617,589.173 L336.444,585 L336.444,585 Z M325,573 L318,577.667 L318,592.333 L325,597 C326.104,597 327,596.104 327,595 L327,575 C327,573.896 326.104,573 325,573 L325,573 Z M311,581 L311,589 C311,590.104 311.896,591 313,591 L316,591 L316,579 L313,579 C311.896,579 311,579.896 311,581 L311,581 Z"></path>
                         </g>
                       </g>
                     </svg>
@@ -204,11 +234,43 @@ const Video = () => {
                     </svg>
                   )}
                 </button>
+                {/* ------Video Duration---- */}
                 <div className="durationContainer">
                   <div className="currentTime">0:00</div>
                   <div className="totalTime">/ {totalDuration}</div>
                 </div>
-                <button className="speedBtn wide">1x</button>
+                {/* ------Speed Controler---- */}
+                <div className="speedDropdown" ref={speedDropdownRef}>
+                  <button
+                    className="speedBtn wide"
+                    onClick={() => setIsSpeedMenuVisible(!isSpeedMenuVisible)}
+                  >
+                    {selectedSpeed}x
+                  </button>
+                  {isSpeedMenuVisible && (
+                    <div className="speedOptions">
+                      <div
+                        className="speedOption"
+                        onClick={() => handleSpeedSelect(0.75)}
+                      >
+                        0.75x
+                      </div>
+                      <div
+                        className="speedOption"
+                        onClick={() => handleSpeedSelect(1)}
+                      >
+                        1x
+                      </div>
+                      <div
+                        className="speedOption"
+                        onClick={() => handleSpeedSelect(2)}
+                      >
+                        2x
+                      </div>
+                    </div>
+                  )}
+                </div>
+                {/* ------FullScreen Button---- */}
                 <button className="fullScreenBtn" ref={fullScreenBtn}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

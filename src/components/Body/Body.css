@@ -105,9 +105,37 @@ video{
     width: 34px;
     color: white;
     position: relative;
-    right: 30px;
+    right: 40px;
 }
 
+.speedDropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .speedOptions {
+    position: absolute;
+    bottom: 35px; 
+    right: 10px;
+    background-color: var(--secondaryClr);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 5px;
+    z-index: 1;
+  }
+  
+  .speedOption {
+    cursor: pointer;
+    padding: 8px 16px;
+  }
+  
+  .speedOption:hover {
+    background-color: var(--highLightClr);
+    border-radius: 5px;
+    color: var(--primaryClr);
+  }
+  
 
 .durationContainer{
     display: flex;
