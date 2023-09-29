@@ -1,214 +1,230 @@
-.container{
-    display: flex;
-    flex-direction: row;
-    width: 100vw;
-    height: 100%;
-    background-color: rgb(29, 30, 30);
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  height: 100%;
 }
 
-.videoSection{
-    width: 75%;
-    background: var(--primaryClr);
-    display: flex;
-    flex-direction: column; 
-    align-items: center;
-    position: relative;
-    padding-bottom: 20px;
+.videoSection {
+  width: 75%;
+  background: var(--primaryClr);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding-bottom: 20px;
 }
 
-.videoContainer{
-    width: 100%;
-    max-width: 1000px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
+.videoContainer {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
 }
 
-video{
-    background-color: var(--primaryClr);
-    margin-top: 5px;
-    width: 100%;
+video {
+  background-color: var(--primaryClr);
+  margin-top: 5px;
+  width: 100%;
 }
-
 
 /* ! ----------------------------------CONTROL CONTAINER------------------ */
 
-.videoControlContainer{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    color: white;
-    z-index: 100;
-    opacity: 0;
-    transition: opacity 450ms ease-in-out;
+.videoControlContainer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: white;
+  z-index: 100;
+  opacity: 0;
+  transition: opacity 450ms ease-in-out;
 
-    width: 100%;
+  width: 100%;
 }
 
-.videoControlContainer::before{
-    content: "";
-    position: absolute;
-    bottom: 0;
-    background: linear-gradient(to top, #111c36aa, transparent);
-    width: 100%;
-    aspect-ratio: 6/1;
-    z-index: -1;
-    pointer-events: none;
+.videoControlContainer::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  background: linear-gradient(to top, #111c36aa, transparent);
+  width: 100%;
+  aspect-ratio: 6/1;
+  z-index: -1;
+  pointer-events: none;
 }
 
 .videoContainer:hover .videoControlContainer,
 .videoContainer:focus .videoControlContainer,
-.videoContainer.paused .videoControlContainer{
-    opacity: 1;
+.videoContainer.paused .videoControlContainer {
+  opacity: 1;
 }
 
-.videoControlContainer .controls{
-    display: flex;
-    gap: 10px;
-    padding: 15px;
-    align-items: center;
-    width: 100%;
+.videoControlContainer .controls {
+  display: flex;
+  gap: 10px;
+  padding: 15px;
+  align-items: center;
+  width: 100%;
 }
 
-.videoControlContainer .controls button{
-    background: none;
-    border: none;
-    padding: 0;
-    height: 30px;
-    width: 30px;
-    font-size: 16px;
-    opacity: .60;
-    transition: opacity 150ms ease-in-out;
+.videoControlContainer .controls button {
+  background: none;
+  border: none;
+  padding: 0;
+  height: 30px;
+  width: 30px;
+  font-size: 16px;
+  opacity: 0.6;
+  transition: opacity 150ms ease-in-out;
 }
 
-.videoControlContainer .controls button:hover{
-    opacity: 1;
+.videoControlContainer .controls button:hover {
+  opacity: 1;
 }
 
-.playPauseBtn svg{
-    background-color: var(--secondaryClr);
-    border: 2px solid var(--subFontClr);
-    border-radius: 15px;
-    cursor: pointer;
-    padding: 2px;
+.playPauseBtn svg {
+  background-color: var(--secondaryClr);
+  border: 2px solid var(--subFontClr);
+  border-radius: 15px;
+  cursor: pointer;
+  padding: 2px;
 }
 
-.controls .fullScreenBtn{
-    position: absolute;
-    right: 10px;
-    bottom: 10px;
-    cursor: pointer;
+.controls .fullScreenBtn {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  cursor: pointer;
 }
 
-.videoContainer.paused .pauseIcon{
-    display: none;
+.videoContainer.paused .pauseIcon {
+  display: none;
 }
 
-.videoContainer:not(.paused) .playIcon{
-    display: none;
+.videoContainer:not(.paused) .playIcon {
+  display: none;
 }
 
 /* Speed Dropdown Styling */
-.videoControlContainer .controls button.wide{
-    width: 40px;
-    color: white;
-    position: relative;
-    right: 65px;
+.videoControlContainer .controls button.wide {
+  width: 40px;
+  color: white;
+  position: relative;
+  right: 65px;
 }
 
 .speedDropdown {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .speedOptions {
-    position: absolute;
-    bottom: 35px; 
-    right: 30px;
-    background-color: var(--secondaryClr);
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    padding: 5px;
-    z-index: 1;
-  }
-  
-  .speedOption {
-    cursor: pointer;
-    padding: 8px 16px;
-  }
-  
-  .speedOption:hover {
-    background-color: var(--highLightClr);
-    border-radius: 5px;
-    color: var(--primaryClr);
-  }
-  
-.durationContainer{
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    flex-grow: 1;
+  position: relative;
+  display: inline-block;
 }
 
+.speedOptions {
+  position: absolute;
+  bottom: 35px;
+  right: 30px;
+  background-color: var(--secondaryClr);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 5px;
+  z-index: 1;
+}
+
+.speedOption {
+  cursor: pointer;
+  padding: 8px 16px;
+}
+
+.speedOption:hover {
+  background-color: var(--highLightClr);
+  border-radius: 5px;
+  color: var(--primaryClr);
+}
+
+.durationContainer {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-grow: 1;
+}
 
 /* Timeline Container Styling */
-.timelineContainer{
-    height: 7px;
-    margin-inline: 5px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+.timelineContainer {
+  height: 7px;
+  margin-inline: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
-.timelineContainer:hover .timeline{
-    height: 100%;
+.timelineContainer:hover .timeline {
+  height: 100%;
 }
 
-.timeline{
-    background-color: rgb(236, 205, 205);
-    height: 3px;
-    width: 100%;
-    bottom: 0px;
-    position: relative;
+.timeline {
+  background-color: rgb(236, 205, 205);
+  height: 3px;
+  width: 100%;
+  bottom: 0px;
+  position: relative;
 }
 
 .thumbIndicator {
-    position: absolute;
-    height: 12px;
-    width: 12px;
-    background-color: var(--highLightClr);
-    border-radius: 50%;
-    cursor: pointer;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-}  
+  position: absolute;
+  height: 12px;
+  width: 12px;
+  background-color: var(--highLightClr);
+  border-radius: 50%;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
 
 /* ! ----------------------------------VIDEO CONTENT STYLING------------------ */
 
 .videoContentContainer {
-    width: 88%;
-    max-width: 1000px;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-  }
-
-.videoContentContainer  h2{
-    padding: 10px 0;
+  width: 88%;
+  max-width: 1000px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
+.videoContentContainer h2 {
+  padding: 10px 0;
+}
 
 /* *----------------------------------------------- Video Item Container ----------------------------------- */
-.videoItemContainer{
-    background-color: rebeccapurple;
-    width: 25%;
-    height: 100;
-    display: flex;
-    justify-content: center;
-    position: relative;
-    /* align-items: center; */
+.videoItemContainer {
+  background-color: var(--primaryClr);
+  width: 25%;
+  height: 100;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  padding-right: 15px;
+}
+
+.videoIncard {
+  border: 2px solid transparent;
+  padding: 0 20px;
+  margin: 5px;
+}
+
+.videoIncard:hover {
+  border: 2px solid var(--highLightClr);
+  border-radius: 15px;
+}
+
+.cardContent {
+  margin-bottom: 28px;
+  padding: 10px 20px;
+}
+
+.cardContent > h3 {
+  margin: 5px 0;
 }

@@ -1,6 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import "./Body.css";
 import Video_1 from "../../assets/video.mp4";
+import Video_2 from "../../assets/video2.mp4";
+import Video_3 from "../../assets/video3.mp4";
+import Video_4 from "../../assets/video4.mp4";
+import Video_5 from "../../assets/video5.mp4";
 
 const Video = () => {
   const playPauseBtn = useRef(null);
@@ -15,6 +19,30 @@ const Video = () => {
   const [isSpeedMenuVisible, setIsSpeedMenuVisible] = useState(false);
   const [selectedSpeed, setSelectedSpeed] = useState(1);
   const [progressPosition, setProgressPosition] = useState(0);
+
+  let videoData = [
+    {
+      videoPath: Video_2,
+      heading: "Video 2 Heading",
+      description: "Description of video 2 hello Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates eveniet consequuntur, eligendi quisquam magnam modi cumque architecto eum incidunt minus? Dicta nemo et culpa earum ipsa saepe asperiores, illum itaque "
+    },
+    {
+      videoPath: Video_3,
+      heading: "Video 3 Heading",
+      description: "Description of video 3 Description of video 2 hello Lorem ipsum icing elit. Voluptates eveniet consequuntur, eligendi quisquam magnam modi cumque architecto eum incidunt minus? Dicta nemo et culpa earum ipsa saepe asperiores, illum itaque"
+    },
+    {
+      videoPath: Video_4,
+      heading: "Video 4 Heading",
+      description: "Description of video 4 Description of video 2 hello Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates eveniet consequuntur, eligendi quisquam magnam modi cumque architecto um ipsa saepe asperiores, illum itaque"
+    },
+    {
+      videoPath: Video_5,
+      heading: "Video 5 Heading",
+      description: "Description of video 5 Description of video 2 hello Lorem dipisicing elit. Voluptates eveniet consequuntur, eligendi quisquam magnam modi cumque architecto eum incidunt minus? Dicta nemo et culpa earum ipsa saepe asperiores, illum itaque"
+    }
+  ]
+
 
   const togglePlay = () => {
     if (video.current) {
@@ -157,7 +185,7 @@ const Video = () => {
     };
   }, []);
 
-  // *------------------------------------ ClickOutside
+  // *----------------------------------------- ClickOutside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -334,15 +362,20 @@ const Video = () => {
         </div>
         <div className="videoItemContainer">
           <div className="videoCardsContainer">
-                    <div className="videoIncard">
-                    
-                    </div>
-                    <div className="cardContent">
-                      <h3 className="heading">Video1</h3>
-                      <p className="para">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Blanditiis maiores vitae laboriosam dignissimos suscipit impedit magnam molestiae pariatur, inventore doloremque.</p>
-                    </div>
+            {videoData.map((video, index) => (
+              <div className="videoIncard" key={index}>
+                <video width="320" height="160" >
+                  <source src={video.videoPath} type="video/mp4" />
+                </video>
+                <div className="cardContent">
+                  <h3 className="heading">{video.heading}</h3>
+                  <p className="para">{video.description.slice(0, 150) + (video.description.length > 150 ? '...' : video.description)}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
+
       </div>
     </>
   );
