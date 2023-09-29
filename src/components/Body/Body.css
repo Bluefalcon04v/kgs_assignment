@@ -20,7 +20,7 @@
 }
 
 video{
-    background-color: rebeccapurple;
+    background-color: var(--primaryClr);
     margin-top: 5px;
     width: 100%;
 }
@@ -33,7 +33,7 @@ video{
     bottom: 0;
     left: 0;
     right: 0;
-    /* color: white; */
+    color: white;
     z-index: 100;
     opacity: 0;
     transition: opacity 450ms ease-in-out;
@@ -101,6 +101,20 @@ video{
     display: none;
 }
 
+.videoControlContainer .controls button.wide{
+    width: 34px;
+    color: white;
+    position: relative;
+    right: 30px;
+}
+
+
+.durationContainer{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-grow: 1;
+}
 
 /* ! ----------------------------------VIDEO CONTENT STYLING------------------ */
 

@@ -10,6 +10,8 @@ const Video = () => {
   const fullScreenBtn = useRef(null);
   const [isPaused, setIsPaused] = useState(true);
   const [isMuted, setIsMuted] = useState(false);
+  const [totalDuration, setTotalDuration] = useState("0:00");
+
 
   useEffect(() => {
     if (playPauseBtn.current) {
@@ -36,6 +38,9 @@ const Video = () => {
       if (volumeBtn.current) {
         volumeBtn.current.removeEventListener("click", toggleMute);
       }
+      if (video.current) {
+        video.current.removeEventListener("loadedmetadata", () => {});
+      }
     };
   }, []);
 
@@ -55,6 +60,22 @@ const Video = () => {
         setIsPaused(true);
       });
     }
+
+     // *---------------------------------- Current Timeline
+    if (video.current) {
+      video.current.addEventListener("loadedmetadata", () => {
+        const minutes = Math.floor(video.current.duration / 60);
+        const seconds = Math.floor(video.current.duration % 60);
+        setTotalDuration(`${minutes}:${seconds.toString().padStart(2, "0")}`);
+      });
+  
+      video.current.addEventListener("timeupdate", () => {
+        const minutes = Math.floor(video.current.currentTime / 60);
+        const seconds = Math.floor(video.current.currentTime % 60);
+        document.querySelector(".currentTime").textContent = `${minutes}:${seconds.toString().padStart(2, "0")}`;
+      });
+    }  
+
 
     return () => {
       if (video.current) {
@@ -183,6 +204,11 @@ const Video = () => {
                     </svg>
                   )}
                 </button>
+                <div className="durationContainer">
+                  <div className="currentTime">0:00</div>
+                  <div className="totalTime">/ {totalDuration}</div>
+                </div>
+                <button className="speedBtn wide">1x</button>
                 <button className="fullScreenBtn" ref={fullScreenBtn}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
