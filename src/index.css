@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Source+Sans+3:wght@200;300;400;500;600;700;800;900&display=swap');
+
 body{
   /* ? Colors */
   --primaryClr: #0c1322;
@@ -5,6 +7,7 @@ body{
   --highLightClr: #FCAF36;
   --fontClr: #eaeaea;
   --subFontClr: #FAFAFA;
+  --mainFont: 'Quicksand', sans-serif;
 }
 
 *{
@@ -19,5 +22,32 @@ body{
 html, body{
   height: 100%;
   width: 100%;
-  background: lightblue;
+  font-family: var(--mainFont);
+  overflow-x: hidden;
+}
+
+body::-webkit-scrollbar {
+  width: 15px;
+  background-color: var(--primaryClr);
+}
+
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--highLightClr);
+  border-radius: 30px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: var(--subFontClr);
+}
+
+.heading{
+  color: var(--highLightClr);
+}
+
+.para{
+  color: var(--subFontClr)
 }

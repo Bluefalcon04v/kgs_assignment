@@ -1,17 +1,23 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: 100%;
+    background-color: rgb(29, 30, 30);
+}
 
 .videoSection{
     width: 75%;
-    background: rgb(244, 151, 198);
+    background: var(--primaryClr);
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
     align-items: center;
-    position: absolute;
-    justify-content: center; 
+    position: relative;
     padding-bottom: 20px;
 }
 
 .videoContainer{
-    width: 90%;
+    width: 100%;
     max-width: 1000px;
     display: flex;
     flex-direction: column;
@@ -37,6 +43,8 @@ video{
     z-index: 100;
     opacity: 0;
     transition: opacity 450ms ease-in-out;
+
+    width: 100%;
 }
 
 .videoControlContainer::before{
@@ -118,7 +126,7 @@ video{
   .speedOptions {
     position: absolute;
     bottom: 35px; 
-    right: 10px;
+    right: 30px;
     background-color: var(--secondaryClr);
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -194,3 +202,13 @@ video{
 }
 
 
+/* *----------------------------------------------- Video Item Container ----------------------------------- */
+.videoItemContainer{
+    background-color: rebeccapurple;
+    width: 25%;
+    height: 100;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    /* align-items: center; */
+}
