@@ -61,6 +61,7 @@ video{
     gap: 10px;
     padding: 15px;
     align-items: center;
+    width: 100%;
 }
 
 .videoControlContainer .controls button{
@@ -101,11 +102,12 @@ video{
     display: none;
 }
 
+/* Speed Dropdown Styling */
 .videoControlContainer .controls button.wide{
-    width: 34px;
+    width: 40px;
     color: white;
     position: relative;
-    right: 40px;
+    right: 65px;
 }
 
 .speedDropdown {
@@ -136,13 +138,46 @@ video{
     color: var(--primaryClr);
   }
   
-
 .durationContainer{
     display: flex;
     align-items: center;
     gap: 5px;
     flex-grow: 1;
 }
+
+
+/* Timeline Container Styling */
+.timelineContainer{
+    height: 7px;
+    margin-inline: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.timelineContainer:hover .timeline{
+    height: 100%;
+}
+
+.timeline{
+    background-color: rgb(236, 205, 205);
+    height: 3px;
+    width: 100%;
+    bottom: 0px;
+    position: relative;
+}
+
+.thumbIndicator {
+    position: absolute;
+    height: 12px;
+    width: 12px;
+    background-color: var(--highLightClr);
+    border-radius: 50%;
+    cursor: pointer;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}  
 
 /* ! ----------------------------------VIDEO CONTENT STYLING------------------ */
 
