@@ -24,6 +24,7 @@ html, body{
   width: 100%;
   font-family: var(--mainFont);
   overflow-x: hidden;
+  background-color: var(--primaryClr);
 }
 
 body::-webkit-scrollbar {

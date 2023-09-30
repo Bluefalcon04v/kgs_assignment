@@ -20,15 +20,16 @@ const Video = () => {
   const [isSpeedMenuVisible, setIsSpeedMenuVisible] = useState(false);
   const [selectedSpeed, setSelectedSpeed] = useState(1);
   const [progressPosition, setProgressPosition] = useState(0);
-  const [playingVideo, setPlayingVideo] = useState(Video_3); 
+  const [playingVideo, setPlayingVideo] = useState(Video_3);
   const [cardContent, setCardContent] = useState(null);
-
+  const [isVideoItemContainerVisible, setVideoItemContainerVisible] =
+    useState(true);
 
   const handleVideoClick = (video) => {
     setPlayingVideo(video.videoPath);
     setCardContent(video);
   };
- 
+
   // ---------------------------- Video Content Data
   const videoData = [
     {
@@ -63,7 +64,9 @@ const Video = () => {
     },
   ];
 
- 
+  const toggleVideoItemContainer = () => {
+    setVideoItemContainerVisible(!isVideoItemContainerVisible);
+  };
 
   const togglePlay = () => {
     if (video.current) {
@@ -183,8 +186,7 @@ const Video = () => {
       });
     }
 
-    return () => {
-    };
+    return () => {};
   }, [playingVideo]);
 
   // *----------------------------------------- ClickOutside
@@ -300,7 +302,7 @@ const Video = () => {
                 <div className="durationContainer">
                   {/* <div className="currentTime">0:00</div> */}
                   <div className="currentTime">{currentTime}</div>
-                  <div className="totalTime">/ {totalDuration}</div> 
+                  <div className="totalTime">/ {totalDuration}</div>
                 </div>
                 {/* ------Speed Controler---- */}
                 <div className="speedDropdown" ref={speedDropdownRef}>
@@ -354,16 +356,28 @@ const Video = () => {
             </video>
           </div>
           <div className="videoContentContainer">
-          <h2 className="heading">{cardContent ? cardContent.heading : "Video 3 Heading"}</h2>
+            <h2 className="heading">
+              {cardContent ? cardContent.heading : "Video 3 Heading"}
+            </h2>
             <p className="para">
-            {cardContent ? cardContent.description : "Description of video 3 Description of video 2 hello Lorem ipsum icing elit. Voluptates eveniet consequuntur, eligendi quisquam magnam modi cumque architecto eum incidunt minus? Dicta nemo et culpa earum ipsa saepe asperiores, illum itaque"}
+              {cardContent
+                ? cardContent.description
+                : "Description of video 3 Description of video 2 hello Lorem ipsum icing elit. Voluptates eveniet consequuntur, eligendi quisquam magnam modi cumque architecto eum incidunt minus? Dicta nemo et culpa earum ipsa saepe asperiores, illum itaque"}
             </p>
           </div>
         </div>
-        <div className="videoItemContainer">
+        <div
+          className={`videoItemContainer ${
+            isVideoItemContainerVisible ? "visible" : "hidden"
+          }`}
+        >
           <div className="videoCardsContainer">
-          {videoData.map((video, index) => (
-          <div className="videoIncard" key={index} onClick={() => handleVideoClick(video)}>
+            {videoData.map((video, index) => (
+              <div
+                className="videoIncard"
+                key={index}
+                onClick={() => handleVideoClick(video)}
+              >
                 <video width="320" height="160">
                   <source src={video.videoPath} type="video/mp4" />
                 </video>
@@ -380,9 +394,43 @@ const Video = () => {
             ))}
           </div>
         </div>
+        <button className="showhide" onClick={toggleVideoItemContainer}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            height="24"
+            width="24"
+            fill="#ffffff"
+          >
+            <line
+              x1="2"
+              y1="6"
+              x2="22"
+              y2="6"
+              stroke=" #FCAF36"
+              strokeWidth="2"
+            />
+            <line
+              x1="2"
+              y1="12"
+              x2="22"
+              y2="12"
+              stroke=" #FCAF36"
+              strokeWidth="2"
+            />
+            <line
+              x1="2"
+              y1="18"
+              x2="22"
+              y2="18"
+              stroke=" #FCAF36"
+              strokeWidth="2"
+            />
+          </svg>
+        </button>
       </div>
     </>
   );
 };
 
-export default Video;           
+export default Video;

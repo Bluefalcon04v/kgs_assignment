@@ -16,13 +16,14 @@ const Title = () => (
     <>
       <div className="listContainer">
         <Title />
-        <ul>
+        {/* <ul>
           <li>About</li>
           <li>Courses</li>
           <li>Blogs</li>
           <li>Contact</li>
           <li>Cart</li>
-        </ul>
+        </ul> */}
+     
       </div>
     </>
   );

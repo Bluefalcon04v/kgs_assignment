@@ -207,7 +207,10 @@ video {
   justify-content: center;
   position: relative;
   padding-right: 15px;
+  transition: transform 0.8s ease-in-out;
 }
+
+
 
 .videoIncard {
   border: 2px solid transparent;
@@ -227,4 +230,43 @@ video {
 
 .cardContent > h3 {
   margin: 5px 0;
+}
+
+
+.showhide{
+    position: absolute;
+    top: 40px;
+    right: 20px;
+    display: none;
+    cursor: pointer;
+    width: 40px;
+}
+
+
+/* *-------------------------- Responsive --------------------- */
+@media screen and (max-width: 650px) {
+    .showhide{
+        display: block;
+    }
+
+    .videoItemContainer {
+        display: none;
+      }
+
+    .videoSection{
+        width: 100%;
+    }
+    .videoItemContainer.visible {
+        display: block;
+        position: absolute;
+        width: 70%;
+        right: 0;
+        transform: translateX(0%);
+      }
+      
+      .videoItemContainer.hidden {
+        transform: translateX(100%);
+      }
+      
+    
 }
