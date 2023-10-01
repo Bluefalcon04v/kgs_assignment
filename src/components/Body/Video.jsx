@@ -78,6 +78,18 @@ const Video = () => {
     }
   };
 
+  const skipForward = () => {
+    if (video.current) {
+      video.current.currentTime += 15;
+    }
+  };
+
+  const skipBackward = () => {
+    if (video.current) {
+      video.current.currentTime -= 15;
+    }
+  };
+
   const handleSpeedSelect = (speed) => {
     if (video.current) {
       video.current.playbackRate = speed;
@@ -249,6 +261,31 @@ const Video = () => {
                     </svg>
                   )}
                 </button>
+                {/* ------------Skip forward & backward Buttons ------------- */}
+                <button className="skippingBtnContainer">
+                  <button className="skipBtn" onClick={skipBackward}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      height="35"
+                      width="35"
+                      fill="#FCAF36"
+                    >
+                      <path d="M14 7v10l-8-5z" />
+                    </svg>
+                  </button>
+                  <button className="skipBtn" onClick={skipForward}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      height="35"
+                      width="35"
+                      fill="#FCAF36"
+                    >
+                      <path d="M10 7v10l8-5z" />
+                    </svg>
+                  </button>
+                </button>
                 {/* ------Volume Buttons---- */}
                 <button className="volumeBtn" ref={volumeBtn}>
                   {isMuted ? (
@@ -300,7 +337,6 @@ const Video = () => {
                 </button>
                 {/* ------Video Duration---- */}
                 <div className="durationContainer">
-                  {/* <div className="currentTime">0:00</div> */}
                   <div className="currentTime">{currentTime}</div>
                   <div className="totalTime">/ {totalDuration}</div>
                 </div>
@@ -384,8 +420,8 @@ const Video = () => {
                 <div className="cardContent">
                   <h3 className="heading">{video.heading}</h3>
                   <p className="para">
-                    {video.description.slice(0, 150) +
-                      (video.description.length > 150
+                    {video.description.slice(0, 130) +
+                      (video.description.length > 130
                         ? "..."
                         : video.description)}
                   </p>

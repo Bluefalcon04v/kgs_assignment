@@ -108,6 +108,18 @@ video {
   display: none;
 }
 
+/* Skipping Buttons Styling */
+.skippingBtnContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    margin-right: 20px;
+    position: relative;
+    bottom: 5px;
+}
+
+
 /* Speed Dropdown Styling */
 .videoControlContainer .controls button.wide {
   width: 40px;
