@@ -214,14 +214,13 @@ video {
 .videoItemContainer {
   background-color: var(--primaryClr);
   width: 25%;
+  height: 100;
   display: flex;
   justify-content: center;
   position: relative;
   padding-right: 15px;
   transition: transform 0.8s ease-in-out;
 }
-
-
 
 .videoIncard {
   border: 2px solid transparent;
@@ -267,7 +266,7 @@ video {
     .videoSection{
         width: 100%;
     }
-    .videoItemContainer .visible {
+    .videoItemContainer.visible {
         display: block;
         position: absolute;
         width: 70%;
