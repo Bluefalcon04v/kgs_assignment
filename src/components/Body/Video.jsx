@@ -30,6 +30,7 @@ const Video = () => {
     setCardContent(video);
   };
 
+
   // ---------------------------- Video Content Data
   const videoData = [
     {
@@ -129,6 +130,39 @@ const Video = () => {
     }
   };
 
+
+// -------------------------------- Button Comands
+  // useEffect(() => {
+  //   const handleKeyDown = (event) => {
+  //     switch (event.key) {
+  //       case " ": 
+  //         togglePlay();
+  //         break;
+  //       case "ArrowRight":
+  //         skipForward();
+  //         break;
+  //       case "ArrowLeft": 
+  //         skipBackward();
+  //         break;
+  //       case "ArrowUp": 
+  //         toggleMute();
+  //         break;
+  //       case "f":
+  //         toggleFullScreen();
+  //         break;
+  //       default:
+  //         break;
+  //     }
+  //   };
+
+  //   document.body.addEventListener("keydown", handleKeyDown);
+
+  //   return () => {
+  //     document.body.removeEventListener("keydown", handleKeyDown);
+  //   };
+  // }, []); 
+
+
   useEffect(() => {
     if (playPauseBtn.current) {
       playPauseBtn.current.addEventListener("click", togglePlay);
@@ -141,6 +175,31 @@ const Video = () => {
     if (volumeBtn.current) {
       volumeBtn.current.addEventListener("click", toggleMute);
     }
+
+// -------------------------------- Button Comands
+    const handleKeyDown = (event) => {
+      switch (event.key) {
+        case " ": 
+          togglePlay();
+          break;
+        case "ArrowRight":
+          skipForward();
+          break;
+        case "ArrowLeft": 
+          skipBackward();
+          break;
+        case "ArrowUp": 
+          toggleMute();
+          break;
+        case "f":
+          toggleFullScreen();
+          break;
+        default:
+          break;
+      }
+    };
+    
+    document.body.addEventListener("keydown", handleKeyDown);
 
     return () => {
       if (playPauseBtn.current) {
@@ -157,6 +216,8 @@ const Video = () => {
       if (video.current) {
         video.current.removeEventListener("loadedmetadata", () => {});
       }
+
+      document.body.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
 
@@ -212,7 +273,7 @@ const Video = () => {
         setIsSpeedMenuVisible(false);
       }
     };
-
+    
     document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
